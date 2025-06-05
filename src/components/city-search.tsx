@@ -8,14 +8,17 @@ import {
   CommandItem,
   CommandList,
 } from "./ui/command";
-import { Search } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { useSearchLocationsQuery } from "@/hooks/use-weather";
+import { CommandSeparator } from "cmdk";
 
 const CitySearch = () => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const { data: locations, isLoading } = useSearchLocationsQuery(query);
-  console.log(locations);
+
+  const handleSelectedLocation = () => {};
+  //   console.log(locations);
   return (
     <>
       <Button
@@ -38,11 +41,48 @@ const CitySearch = () => {
           {query.length > 2 && !isLoading && (
             <CommandEmpty>No City found.</CommandEmpty>
           )}
-          <CommandGroup heading="Suggestions">
+          <CommandGroup heading="Favourites">
             <CommandItem>Calendar</CommandItem>
-            <CommandItem>Search Emoji</CommandItem>
-            <CommandItem>Calculator</CommandItem>
           </CommandGroup>
+
+          <CommandSeparator />
+          <CommandGroup heading="Recent Searchrs">
+            <CommandItem>Calendar</CommandItem>
+          </CommandGroup>
+
+          <CommandSeparator />
+
+          <CommandSeparator />
+          {locations && locations.length > 0 && (
+            <CommandGroup heading="Suggesations">
+              {isLoading && (
+                <div className="flex items-center justify-center p-4">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                </div>
+              )}
+              {locations.map((location) => {
+                return (
+                  <CommandItem
+                    key={`${location.lat},${location.lon}`}
+                    value={`${location.lat}|${location.lon}|${location.name}|${location.country}`}
+                    onSelect={handleSelectedLocation}
+                  >
+                    <Search className="mr-2 h-4 w-4" />
+                    <span> {location.name}</span>
+                    {location.state && (
+                      <span className="text-sm text-muted-foreground">
+                        , {location.state}
+                      </span>
+                    )}
+                    <span className="text-sm text-muted-foreground">
+                      , {location.country}
+                    </span>
+                  </CommandItem>
+                );
+              })}
+            </CommandGroup>
+          )}
+          {}
         </CommandList>
       </CommandDialog>
     </>
