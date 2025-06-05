@@ -11,6 +11,7 @@ import {
 import CurrentWeather from "@/components/CurrentWeather";
 import HourlyTemperature from "@/components/hourly-temperature";
 import WeatherDetails from "@/components/weather-details";
+import WeatherForecast5days from "@/components/weather-forecast";
 const WeatherDashboard = () => {
   const {
     coordinates,
@@ -123,9 +124,10 @@ const WeatherDashboard = () => {
           />
           <HourlyTemperature data={forecastQuery.data} />
         </div>
-        <div>
+        <div className="grid gap-6 md:grid-cols-2 items-start">
           <WeatherDetails data={weatherQuery.data} />
           {/* forecast */}
+          <WeatherForecast5days data={forecastQuery.data} />
         </div>
       </div>
       {/* current and hourly weather    */}
