@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useLocalStorage } from "./use-local-storage";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 const queryClient = new QueryClient();
@@ -52,4 +51,9 @@ export const UseSearchHistory = () => {
       queryClient.setQueryData(["searchHistory"], []);
     },
   });
+  return {
+    history: historyQuery.data ?? [],
+    addToHistory,
+    clearHistory,
+  };
 };
