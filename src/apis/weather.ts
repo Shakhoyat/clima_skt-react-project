@@ -48,15 +48,18 @@ class WeatherAPI {
     lat,
     lon,
   }: Coordinates): Promise<GeocodingResponse[]> {
-    const url = this.createUrl(
-      "https://api.openweathermap.org/geo/1.0/reverse", // <-- fix here
-      {
-        lat: lat.toString(),
-        lon: lon.toString(),
-        limit: "1",
-        appid: API_CONFIG.API_KEY,
-      }
-    );
+    const url = this.createUrl(`${API_CONFIG.GEO}/reverse`, {
+      lat: lat.toString(),
+      lon: lon.toString(),
+      limit: "1",
+    });
+    return this.fetchData<GeocodingResponse[]>(url);
+  }
+  async searchLocations(query: string): Promise<GeocodingResponse[]> {
+    const url = this.createUrl(`${API_CONFIG.GEO}/direct`, {
+      limit: "5",
+      q: query,
+    });
     return this.fetchData<GeocodingResponse[]>(url);
   }
 }
