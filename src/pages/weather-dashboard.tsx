@@ -3,7 +3,11 @@ import { Button } from "@/components/ui/button";
 import { useGeolocation } from "@/hooks/use-geolocation";
 import { AlertTriangle, MapPin, RefreshCcw, Terminal } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useReverseGeocodeQuery } from "@/hooks/use-weather";
+import {
+  useForecastQuery,
+  useReverseGeocodeQuery,
+  useWeatherQuery,
+} from "@/hooks/use-weather";
 const WeatherDashboard = () => {
   const {
     coordinates,
@@ -12,14 +16,17 @@ const WeatherDashboard = () => {
     getLocation,
   } = useGeolocation();
   // console.log("Coordinates:", coordinates);
+
   const locationQuery = useReverseGeocodeQuery(coordinates);
-  console.log("Location Query Data:", locationQuery.data);
+  const forecastQuery = useForecastQuery(coordinates);
+  const weatherQuery = useWeatherQuery(coordinates);
 
   const handleRefresh = () => {
     getLocation();
-    if (!coordinates) {
-      // console.error("No coordinates available to refresh weather data.");
-      return;
+    if (coordinates) {
+      weatherQuery.refetch();
+      forecastQuery.refetch();
+      locationQuery.refetch();
     }
   };
   if (locationLoading) {
