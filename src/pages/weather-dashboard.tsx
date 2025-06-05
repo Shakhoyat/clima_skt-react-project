@@ -124,7 +124,7 @@ const WeatherDashboard = () => {
           <HourlyTemperature data={forecastQuery.data} />
         </div>
         <div>
-          <WeatherDetails data={forecastQuery.data} />
+          <WeatherDetails data={weatherQuery.data} />
           {/* forecast */}
         </div>
       </div>
