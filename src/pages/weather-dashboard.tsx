@@ -1,7 +1,23 @@
 import { Button } from "@/components/ui/button";
+import { useGeolocation } from "@/hooks/use-geolocation";
 import { RefreshCcw } from "lucide-react";
 
 const WeatherDashboard = () => {
+  const {
+    coordinates,
+    error: locationError,
+    isLoading: locationLoading,
+    getLocation,
+  } = useGeolocation();
+  console.log("Coordinates:", coordinates);
+  const handleRefresh = () => {
+    getLocation();
+    if (!coordinates) {
+      // console.error("No coordinates available to refresh weather data.");
+      return;
+    }
+  };
+
   return (
     <div className="p-4 space-y-4">
       {/* Fav cities */}
