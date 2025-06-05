@@ -1,4 +1,3 @@
-// import { Button } from "@/components/ui/button";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "@/components/layout";
 import { ThemeProvider } from "./context/theme-provider";
@@ -8,8 +7,16 @@ import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-const queryClient = new QueryClient();
-
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 10 * 60 * 1000,
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
