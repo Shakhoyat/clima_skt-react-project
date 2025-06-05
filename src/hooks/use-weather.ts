@@ -14,7 +14,6 @@ export function useWeatherQuery(coordinates: Coordinates | null) {
     queryFn: async () =>
       coordinates ? weatherAPI.getCurrentWeather(coordinates) : null,
     enabled: !!coordinates, // Only run the query if coordinates are available
-    // refetchOnWindowFocus: false // Uncomment if you want to disable refetching on window focus
   });
 }
 export function useForecastQuery(coordinates: Coordinates | null) {
@@ -23,7 +22,6 @@ export function useForecastQuery(coordinates: Coordinates | null) {
     queryFn: async () =>
       coordinates ? weatherAPI.getForecast(coordinates) : null,
     enabled: !!coordinates, // Only run the query if coordinates are available
-    // refetchOnWindowFocus: false // Uncomment if you want to disable refetching on window focus
   });
 }
 export function useReverseGeocodeQuery(coordinates: Coordinates | null) {
@@ -32,6 +30,5 @@ export function useReverseGeocodeQuery(coordinates: Coordinates | null) {
     queryFn: async () =>
       coordinates ? weatherAPI.reverseGeocode(coordinates) : null,
     enabled: !!coordinates, // Only run the query if coordinates are available
-    // refetchOnWindowFocus: false // Uncomment if you want to disable refetching on window focus
   });
 }
