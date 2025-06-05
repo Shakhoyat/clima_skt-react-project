@@ -9,6 +9,7 @@ import {
   useWeatherQuery,
 } from "@/hooks/use-weather";
 import CurrentWeather from "@/components/CurrentWeather";
+import HourlyTemperature from "@/components/hourly-temperature";
 const WeatherDashboard = () => {
   const {
     coordinates,
@@ -119,8 +120,7 @@ const WeatherDashboard = () => {
                 : undefined
             }
           />
-          {/* current weather
-          hourly temperature */}
+          <HourlyTemperature data={forecastQuery.data} />
         </div>
         <div>
           {/* details */}
