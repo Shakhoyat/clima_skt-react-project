@@ -8,7 +8,14 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { LineChart, Line, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import {
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
 import { format } from "date-fns";
 
 interface HourlyTemperatureProps {
@@ -45,7 +52,28 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
                 axisLine={false}
                 tickFormatter={(value) => `${value}°C`}
               />
-
+              <Tooltip
+                content={({ active, payload }) => {
+                  if (active && payload && payload.length) {
+                    const { temp, feels_like } = payload[0].payload;
+                    return (
+                      <div className="rounded-lg border bg-background p-2 shadow-sm">
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="flex flex-col">
+                            <span>Temperature</span>
+                            <span className="font-bold">{temp}°C</span>
+                          </div>
+                          <div className="flex flex-col">
+                            <span>Feels Like</span>
+                            <span className="font-bold">{feels_like}°C</span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                  return null;
+                }}
+              />
               <Line
                 type="monotone"
                 dataKey="temp"
