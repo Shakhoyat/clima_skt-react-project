@@ -11,13 +11,20 @@ import {
 import { Loader2, Search } from "lucide-react";
 import { useSearchLocationsQuery } from "@/hooks/use-weather";
 import { CommandSeparator } from "cmdk";
+import { useNavigate } from "react-router-dom";
 
 const CitySearch = () => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const { data: locations, isLoading } = useSearchLocationsQuery(query);
+  const navigate = useNavigate();
 
-  const handleSelectedLocation = () => {};
+  const handleSelectedLocation = (cityData: string) => {
+    const [lat, lon, name, country] = cityData.split("|");
+    //add to search history
+    navigate(`/city/${name}??lat=${lat}&lon=${lon}`);
+    setOpen(false);
+  };
   //   console.log(locations);
   return (
     <>
