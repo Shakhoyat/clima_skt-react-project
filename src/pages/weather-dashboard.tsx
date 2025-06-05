@@ -1,7 +1,8 @@
+import WeatherSkeliton from "@/components/loading-skeliton";
 import { Button } from "@/components/ui/button";
 import { useGeolocation } from "@/hooks/use-geolocation";
-import { RefreshCcw } from "lucide-react";
-
+import { AlertTriangle, MapPin, RefreshCcw, Terminal } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 const WeatherDashboard = () => {
   const {
     coordinates,
@@ -17,7 +18,42 @@ const WeatherDashboard = () => {
       return;
     }
   };
-
+  if (locationLoading) {
+    return <WeatherSkeliton />;
+  }
+  if (locationError) {
+    return (
+      <Alert variant="destructive">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertTitle>Location Error!</AlertTitle>
+        <AlertDescription>
+          <p>{locationError}</p>
+          <Button variant="outline" className="w-fit" onClick={getLocation}>
+            <MapPin className="mr-2 h-4 w-4" />
+            Enable Location
+          </Button>
+        </AlertDescription>
+      </Alert>
+    );
+  }
+  if (!coordinates) {
+    return (
+      <Alert variant="destructive">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertTitle>Location Not Found</AlertTitle>
+        <AlertDescription>
+          <p>
+            Unable to retrieve your location. Please enable location services
+            and try again.
+          </p>
+          <Button variant="outline" className="w-fit" onClick={getLocation}>
+            <MapPin className="mr-2 h-4 w-4" />
+            Retry
+          </Button>
+        </AlertDescription>
+      </Alert>
+    );
+  }
   return (
     <div className="p-4 space-y-4">
       {/* Fav cities */}
