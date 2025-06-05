@@ -65,6 +65,31 @@ const WeatherDashboard = () => {
       </Alert>
     );
   }
+
+  const locationName = locationQuery.data?.[0] || "Unknown Location";
+  if (weatherQuery.error || forecastQuery.error) {
+    return (
+      <Alert variant="destructive">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertTitle> Error</AlertTitle>
+        <AlertDescription>
+          <p>
+            {weatherQuery.error?.message ||
+              forecastQuery.error?.message ||
+              "An error occurred while fetching weather data."}
+          </p>
+          <Button variant="outline" className="w-fit" onClick={handleRefresh}>
+            <RefreshCcw className="mr-2 h-4 w-4" />
+            Retry
+          </Button>
+        </AlertDescription>
+      </Alert>
+    );
+  }
+  if (!weatherQuery.data || !forecastQuery.data) {
+    return <WeatherSkeliton />;
+  }
+
   return (
     <div className="p-4 space-y-4">
       {/* Fav cities */}
@@ -73,10 +98,14 @@ const WeatherDashboard = () => {
         <Button
           variant={"outline"}
           size={"icon"}
-          // onClick={handleRefresh}
-          // disabled={true} // Disable button for now
+          onClick={handleRefresh}
+          disabled={weatherQuery.isFetching || forecastQuery.isFetching} // Disable button for now
         >
-          <RefreshCcw className="h-4 w-4" />
+          <RefreshCcw
+            className={`h-4 w-4 ${
+              weatherQuery.isFetching ? "animate-spin" : ""
+            }`}
+          />
         </Button>
       </div>
       {/* current and hourly weather    */}
