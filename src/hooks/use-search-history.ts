@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocalStorage } from "./use-local-storage";
-import { useMutation, useQuery } from "@tanstack/react-query";
-u;
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 interface SearchHistoryItem {
   id: string;
   query: string;
@@ -37,6 +37,19 @@ export const UseSearchHistory = () => {
       );
       const updatedHistory = [newSearch, ...filteredHistory].slice(0, 10); // Keep only the last 10 searches
       setHistory(updatedHistory);
+      return updatedHistory;
+    },
+    onSuccess: (newHistory) => {
+      queryClient.setQueryData(["searchHistory"], newHistory);
+    },
+  });
+  const clearHistory = useMutation({
+    mutationFn: async () => {
+      setHistory([]);
+      return [];
+    },
+    onSuccess: () => {
+      queryClient.setQueryData(["searchHistory"], []);
     },
   });
 };
