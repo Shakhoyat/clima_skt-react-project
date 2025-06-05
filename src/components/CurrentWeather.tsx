@@ -1,6 +1,6 @@
 import type { GeocodingResponse, WeatherData } from "@/apis/types";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowDown, ArrowUp, Droplet, Droplets } from "lucide-react";
+import { ArrowDown, ArrowUp, Droplet, Droplets, Wind } from "lucide-react";
 
 interface CurrentWeatherProps {
   data: WeatherData;
@@ -62,15 +62,36 @@ const CurrentWeather = ({ data, locationName }: CurrentWeatherProps) => {
                   </div>
                 </div>
               </div>
-              <div>
-                <div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center gap-2">
                   <Droplets className=" h-4 w-4 mr-1 text-blue-500" />
                   <div className="space-y-0.5">
-                    <p className="text-sm font-medium text-muted-foreground">
-                      Humidity
-                    </p>
+                    <p className="text-sm font-medium ">Humidity</p>
                     <p className="text-sm text-muted-foreground">{humidity}%</p>
                   </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Wind className=" h-4 w-4 mr-1 text-blue-500" />
+                  <div className="space-y-0.5">
+                    <p className="text-sm font-medium ">Wind Speed</p>
+                    <p className="text-sm text-muted-foreground">{speed} m/s</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <div className="relative flex aspect-square w-full max-w-[200px] items-center justify-center rounded-lg p-4">
+                <img
+                  src={`https://openweathermap.org/img/wn/${CurrentWeather.icon}@4x.png`}
+                  alt="weather icon"
+                  className="h-full w-full object-contain"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-0 text-center">
+                  <p className="text-sm font-medium capitalize">
+                    {CurrentWeather.description}
+                  </p>
                 </div>
               </div>
             </div>
