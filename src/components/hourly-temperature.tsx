@@ -1,70 +1,80 @@
-import type { ForecastData } from "@/apis/types";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
   LineChart,
   Line,
-  ResponsiveContainer,
   XAxis,
   YAxis,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 import { format } from "date-fns";
+import type { ForecastData } from "@/api/types";
 
 interface HourlyTemperatureProps {
-  data: ForecastData; // Replace 'any' with the actual type of your hourly temperature data
+  data: ForecastData;
 }
-const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
-  const chartData = data.list.slice(0, 8).map((item) => ({
-    time: format(new Date(item.dt * 1000), "ha"),
-    temp: Math.round(item.main.temp),
-    feels_like: Math.round(item.main.feels_like),
-  }));
+
+interface ChartData {
+  time: string;
+  temp: number;
+  feels_like: number;
+}
+
+export function HourlyTemperature({ data }: HourlyTemperatureProps) {
+  // Get today's forecast data and format for chart
+
+  const chartData: ChartData[] = data.list
+    .slice(0, 8) // Get next 24 hours (3-hour intervals)
+    .map((item) => ({
+      time: format(new Date(item.dt * 1000), "ha"),
+      temp: Math.round(item.main.temp),
+      feels_like: Math.round(item.main.feels_like),
+    }));
+
   return (
     <Card className="flex-1">
       <CardHeader>
-        <CardTitle>Today's Temperature </CardTitle>
-        <CardDescription>Card Description</CardDescription>
-        <CardAction>Card Action</CardAction>
+        <CardTitle>Today's Temperature</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="h-[200px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
               <XAxis
-                dataKey={"time"}
-                stroke="#8884d8"
+                dataKey="time"
+                stroke="#888888"
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
               />
               <YAxis
-                stroke="#8884d8"
+                stroke="#888888"
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(value) => `${value}°C`}
+                tickFormatter={(value) => `${value}°`}
               />
               <Tooltip
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
-                    const { temp, feels_like } = payload[0].payload;
                     return (
                       <div className="rounded-lg border bg-background p-2 shadow-sm">
                         <div className="grid grid-cols-2 gap-2">
                           <div className="flex flex-col">
-                            <span>Temperature</span>
-                            <span className="font-bold">{temp}°C</span>
+                            <span className="text-[0.70rem] uppercase text-muted-foreground">
+                              Temperature
+                            </span>
+                            <span className="font-bold">
+                              {payload[0].value}°
+                            </span>
                           </div>
                           <div className="flex flex-col">
-                            <span>Feels Like</span>
-                            <span className="font-bold">{feels_like}°C</span>
+                            <span className="text-[0.70rem] uppercase text-muted-foreground">
+                              Feels Like
+                            </span>
+                            <span className="font-bold">
+                              {payload[1].value}°
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -76,17 +86,17 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
               <Line
                 type="monotone"
                 dataKey="temp"
-                stroke="#8884d8"
+                stroke="#2563eb"
                 strokeWidth={2}
                 dot={false}
               />
               <Line
                 type="monotone"
                 dataKey="feels_like"
-                stroke="#82ca9d"
+                stroke="#64748b"
                 strokeWidth={2}
                 dot={false}
-                strokeDasharray={"5 5"}
+                strokeDasharray="5 5"
               />
             </LineChart>
           </ResponsiveContainer>
@@ -94,6 +104,4 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
       </CardContent>
     </Card>
   );
-};
-
-export default HourlyTemperature;
+}
