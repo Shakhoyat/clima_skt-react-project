@@ -13,10 +13,11 @@ export function Header() {
           <img
             src={
               theme === "dark"
-                ? "clima_skt-react-projectpubliclogo-light.png"
-                : "clima_skt-react-projectpubliclogo-dark.png"
+                ? "/clima_skt-react-project/public/logo-dark.png"
+                : "/clima_skt-react-project/public/logo-light.png"
             }
             alt="CliMaSKT"
+            className="h-14"
           />
         </Link>
 
