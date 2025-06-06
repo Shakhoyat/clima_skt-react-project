@@ -71,7 +71,7 @@ const WeatherDashboard = () => {
     );
   }
 
-  const locationName = locationQuery.data?.[0] || "Unknown Location";
+  const locationName = locationQuery.data?.[0];
   if (weatherQuery.error || forecastQuery.error) {
     return (
       <Alert variant="destructive">
