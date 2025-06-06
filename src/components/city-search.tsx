@@ -5,7 +5,7 @@ import { useSearchLocationsQuery } from "@/hooks/use-weather";
 import { CommandSeparator } from "cmdk";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { UseSearchHistory } from "@/hooks/use-search-history";
+import { useSearchHistory } from "@/hooks/use-search-history";
 import { useFavorites } from "@/hooks/use-favourite";
 import {
   Command,
@@ -24,7 +24,7 @@ export function CitySearch() {
 
   const { data: locations, isLoading } = useSearchLocationsQuery(query);
   const { favorites } = useFavorites();
-  const { history, clearHistory, addToHistory } = UseSearchHistory();
+  const { history, clearHistory, addToHistory } = useSearchHistory();
 
   const handleSelect = (cityData: string) => {
     const [lat, lon, name, country] = cityData.split("|");
