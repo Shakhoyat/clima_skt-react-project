@@ -1,6 +1,6 @@
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocalStorage } from "./use-local-storage";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
-const queryClient = new QueryClient();
+
 interface SearchHistoryItem {
   id: string;
   query: string;
@@ -12,48 +12,56 @@ interface SearchHistoryItem {
   searchedAt: number;
 }
 
-export const UseSearchHistory = () => {
+export function useSearchHistory() {
   const [history, setHistory] = useLocalStorage<SearchHistoryItem[]>(
-    "searchHistory",
+    "search-history",
     []
   );
+  const queryClient = useQueryClient();
+
   const historyQuery = useQuery({
-    queryKey: ["searchHistory"],
+    queryKey: ["search-history"],
     queryFn: () => history,
-    initialData: history, // Keep the history fresh indefinitely
+    initialData: history,
   });
+
   const addToHistory = useMutation({
     mutationFn: async (
-      search: Omit<SearchHistoryItem, "id" | "SearchedAt">
+      search: Omit<SearchHistoryItem, "id" | "searchedAt">
     ) => {
       const newSearch: SearchHistoryItem = {
         ...search,
         id: `${search.lat}-${search.lon}-${Date.now()}`,
         searchedAt: Date.now(),
       };
+
+      // Remove duplicates and keep only last 10 searches
       const filteredHistory = history.filter(
-        (item) => item.lat !== search.lat || item.lon !== search.lon
+        (item) => !(item.lat === search.lat && item.lon === search.lon)
       );
-      const updatedHistory = [newSearch, ...filteredHistory].slice(0, 10); // Keep only the last 10 searches
-      setHistory(updatedHistory);
-      return updatedHistory;
+      const newHistory = [newSearch, ...filteredHistory].slice(0, 10);
+
+      setHistory(newHistory);
+      return newHistory;
     },
     onSuccess: (newHistory) => {
-      queryClient.setQueryData(["searchHistory"], newHistory);
+      queryClient.setQueryData(["search-history"], newHistory);
     },
   });
+
   const clearHistory = useMutation({
     mutationFn: async () => {
       setHistory([]);
       return [];
     },
     onSuccess: () => {
-      queryClient.setQueryData(["searchHistory"], []);
+      queryClient.setQueryData(["search-history"], []);
     },
   });
+
   return {
     history: historyQuery.data ?? [],
     addToHistory,
     clearHistory,
   };
-};
+}
