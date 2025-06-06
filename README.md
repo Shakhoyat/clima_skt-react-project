@@ -92,9 +92,10 @@ Your recent searches are saved for quick access. Clear your history with a singl
 
 - **React 18** + **TypeScript**
 - **Vite** for lightning-fast development
-- **React Query** for data fetching and caching
+- **TanStack Query** for data fetching and caching
+- **Shadcn UI** for accessible, customizable UI components
 - **React Router** for navigation
-- **Tailwind CSS** (or your preferred styling solution)
+- **Tailwind CSS** for styling
 - **OpenWeatherMap API** for weather data
 
 ---
