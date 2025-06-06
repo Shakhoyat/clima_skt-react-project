@@ -1,111 +1,166 @@
-# React + TypeScript + Vite
+# 🌦️ ClimaSKT React Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-# Clima SKT – Weather App
-
-Welcome to **Clima SKT**!  
-A beginner-friendly weather app built with modern web technologies:
-
-- **React** & **TypeScript** – Robust, type-safe UI development
-- **Vite** – Lightning-fast tooling and HMR
-- **TanStack Query** – Effortless data fetching and caching
-- **shadcn/ui** – Beautiful, accessible UI components
-- **Tailwind CSS** – Rapid, utility-first styling
+A modern, feature-rich weather dashboard built with React, TypeScript, and Vite. Get real-time weather updates, forecasts, and more—all with a beautiful, responsive UI.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Features
 
-1. **Install dependencies**
-  ```bash
-  npm install
-  ```
-2. **Start the development server**
-  ```bash
-  npm run dev
-  ```
-3. **Build for production**
-  ```bash
-  npm run build
-  ```
+- **Live Weather Dashboard:** Instantly see your local weather with geolocation support. View current temperature, conditions, wind, pressure, sunrise/sunset, and more.
+- **Hourly & 5-Day Forecasts:** Visualize upcoming weather trends with detailed hourly and daily forecasts.
+- **City Search & Quick Navigation:** Search for any city worldwide and jump to its weather instantly. Recent searches and favorites for fast access.
+- **Favorite Cities:** Pin your favorite locations for one-click weather checks. Remove favorites with a single click.
+- **Responsive & Themed UI:** Fully responsive design for desktop and mobile. Dark/light mode toggle for comfortable viewing.
+- **Error Handling & Loading States:** Friendly error messages and skeleton loaders for a smooth experience.
+- **Powered by OpenWeatherMap API**
 
 ---
 
-## ✨ Features
+## 🖼️ Screenshots & Feature Highlights
 
-- 🌦️ Real-time weather data fetching
-- ⚡ Fast, responsive UI with shadcn/ui and Tailwind CSS
-- 🔄 Data fetching & caching via TanStack Query
-- 🛠️ Type safety with TypeScript
-- 🚀 Instant reloads with Vite
+Below are some highlights of ClimaSKT's features, each with a visual example:
 
 ---
 
-## 📚 Useful Resources
+### 🌍 Live Location Weather
+See your current weather instantly with geolocation support.
 
-- [React Documentation](https://react.dev/)
-- [TypeScript Docs](https://www.typescriptlang.org/docs/)
-- [TanStack Query](https://tanstack.com/query/latest)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Vite](https://vitejs.dev/)
+![Live Location](./screenshots/cliskt3.png)
 
 ---
 
-## 📝 ESLint & Code Quality
+### 🌓 Dark & Light Mode
+Switch between beautiful dark and light themes for comfortable viewing.
 
-This project uses ESLint with recommended TypeScript and React rules.  
-You can further enhance linting by adding plugins like `eslint-plugin-react-x` and `eslint-plugin-react-dom`.
+| Dark Mode | Light Mode |
+|-----------|-----------|
+| ![Dark Mode](./screenshots/cliskt1.png) | ![Light Mode](./screenshots/cliskt2.png) |
 
 ---
 
-Happy coding! 🎉  
-Feel free to explore, experiment, and make it your own.
+### ⏰ Hourly & 5-Day Forecasts
+Visualize upcoming weather trends with detailed hourly and daily forecasts.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Hourly Forecasts:**
+  
+  ![Hourly Forecasts](./screenshots/cliskt4.png)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **5 Day Forecast:**
+  
+  ![5 Day Forecast](./screenshots/cliskt6.png)
+
+---
+
+### 📋 Weather Details
+Get in-depth weather information including wind, pressure, sunrise, and sunset times.
+
+![Weather Details](./screenshots/cliskt5.png)
+
+---
+
+### 🔍 City Search & Smart Suggestions
+Search for any city worldwide and get instant, smart suggestions as you type.
+
+![City Search](./screenshots/cliskt7.png)
+![Smart Suggestions](./screenshots/cliskt8.png)
+
+- **Detailed Search Results:**
+
+  ![Search Result Details](./screenshots/cliskt10.png)
+
+---
+
+### ⭐ Favorite Cities
+Pin your favorite locations for one-click weather checks. Remove favorites with a single click.
+
+| Favorites List | Remove Favorite | Favorite Removed |
+|---------------|----------------|-----------------|
+| ![Favorite Cities](./screenshots/cliskt11.png) | ![Remove Favorite](./screenshots/cliskt12.png) | ![Favorite Removed](./screenshots/cliskt13.png) |
+
+---
+
+### 🕑 Search History
+Your recent searches are saved for quick access. Clear your history with a single click.
+
+| Search History | Clear History |
+|----------------|--------------|
+| ![Search History](./screenshots/cliskt14.png) | ![Clear History](./screenshots/cliskt15.png) |
+
+---
+
+## 🖥️ Tech Stack
+
+- **React 18** + **TypeScript**
+- **Vite** for lightning-fast development
+- **React Query** for data fetching and caching
+- **React Router** for navigation
+- **Tailwind CSS** (or your preferred styling solution)
+- **OpenWeatherMap API** for weather data
+
+---
+
+## ⚡ Quick Start
+
+1. **Clone the repo:**
+
+   ```sh
+   git clone https://github.com/yourusername/clima_skt-react-project.git
+   cd clima_skt-react-project
+   ```
+
+2. **Install dependencies:**
+
+   ```sh
+   npm install
+   ```
+
+3. **Set up your OpenWeatherMap API key:**
+   - Create a `.env` file and add your API key as per `src/apis/config.ts`.
+
+4. **Run the app:**
+
+   ```sh
+   npm run dev
+   ```
+
+5. **Open in browser:**
+   - Visit [http://localhost:5173/clima_skt-react-project](http://localhost:5173/clima_skt-react-project)
+
+---
+
+## 🛠️ Project Structure
+
+```text
+src/
+  pages/         # Main application pages (Dashboard, CityView, NotFound, etc.)
+  components/    # Reusable UI and feature components
+  apis/          # API configuration, endpoints, and TypeScript data types
+  hooks/         # Custom React hooks
+  context/       # React context providers for theme, favorites, and global state
+  utils/         # Utility functions and helpers
+  assets/        # Static assets (images, icons, fonts)
+  styles/        # Global styles and Tailwind configuration
+  routes/        # Route definitions and navigation helpers
+  tests/         # Unit and integration tests
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> This structure keeps your codebase modular, scalable, and easy to maintain.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## ✨ Why You'll Love It
+
+- **Blazing fast** thanks to Vite and React Query
+- **Beautiful UI** with modern design and smooth interactions
+- **Easy to extend** and customize for your own needs
+- **Great developer experience** with TypeScript and modular code
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+> Made by Shakhoyat ❤️ — Happy Coding!
