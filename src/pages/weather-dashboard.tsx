@@ -8,7 +8,7 @@ import {
   useReverseGeocodeQuery,
   useWeatherQuery,
 } from "@/hooks/use-weather";
-import CurrentWeather from "@/components/CurrentWeather";
+import CurrentWeather from "@/components/current-weather";
 import HourlyTemperature from "@/components/hourly-temperature";
 import WeatherDetails from "@/components/weather-details";
 import WeatherForecast5days from "@/components/weather-forecast";
