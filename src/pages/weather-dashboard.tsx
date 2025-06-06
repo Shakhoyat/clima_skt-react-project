@@ -1,7 +1,7 @@
 import WeatherSkeliton from "@/components/loading-skeliton";
 import { Button } from "@/components/ui/button";
 import { useGeolocation } from "@/hooks/use-geolocation";
-import { AlertTriangle, MapPin, RefreshCcw, Terminal } from "lucide-react";
+import { AlertTriangle, MapPin, RefreshCcw } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   useForecastQuery,
@@ -112,6 +112,7 @@ const WeatherDashboard = () => {
           />
         </Button>
       </div>
+
       <div className="grid gap-6">
         <div className="flex flex-col lg:flex-row gap-4">
           <CurrentWeather
