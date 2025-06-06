@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "./components/ui/sonner";
 import { WeatherDashboard } from "./pages/weather-dashboard";
-import Layout from "./components/layout";
+import { Layout } from "./components/layout";
 import { ThemeProvider } from "./context/theme-provider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CityPage } from "./pages/city-page";
@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/clima_skt-react-project">
         <ThemeProvider defaultTheme="dark">
           <Layout>
             <Routes>

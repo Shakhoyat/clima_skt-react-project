@@ -11,9 +11,12 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link to={"/"}>
           <img
-            src={theme === "dark" ? "/logo.png" : "/logo2.png"}
-            alt="Klimate logo"
-            className="h-14"
+            src={
+              theme === "dark"
+                ? "clima_skt-react-projectpubliclogo-light.png"
+                : "clima_skt-react-projectpubliclogo-dark.png"
+            }
+            alt="CliMaSKT"
           />
         </Link>
 
@@ -24,4 +27,12 @@ export function Header() {
       </div>
     </header>
   );
+}
+{
+  /* 
+  <img
+  src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
+  alt="Klimate logo"
+  className="h-14"
+/>; */
 }
