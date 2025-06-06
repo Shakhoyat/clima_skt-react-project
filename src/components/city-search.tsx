@@ -6,7 +6,7 @@ import { CommandSeparator } from "cmdk";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { useSearchHistory } from "@/hooks/use-search-history";
-import { useFavorites } from "@/hooks/use-favourite";
+import { useFavorites } from "@/hooks/use-favourites";
 import {
   Command,
   CommandDialog,
