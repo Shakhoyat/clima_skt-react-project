@@ -82,7 +82,7 @@ function FavoriteCityTablet({
   );
 }
 
-export function FavoriteCities() {
+export function FavouriteCities() {
   const { favorites, removeFavorite } = useFavorites();
 
   if (!favorites.length) {

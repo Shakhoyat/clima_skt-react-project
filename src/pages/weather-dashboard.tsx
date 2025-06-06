@@ -11,7 +11,7 @@ import { useGeolocation } from "@/hooks/use-geolocation";
 import { WeatherDetails } from "../components/weather-details";
 import { WeatherForecast } from "../components/weather-forecast";
 import { HourlyTemperature } from "../components/hourly-temperature";
-import FavouriteCities from "../components/favourite-cities";
+import { FavouriteCities } from "../components/favourite-cities";
 import WeatherSkeleton from "../components/loading-skeliton";
 export function WeatherDashboard() {
   const {
