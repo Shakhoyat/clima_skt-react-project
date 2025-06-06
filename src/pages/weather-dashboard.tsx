@@ -12,6 +12,7 @@ import { CurrentWeather } from "@/components/current-weather";
 import { WeatherDetails } from "@/components/weather-details";
 import { HourlyTemperature } from "@/components/hourly-temperature";
 import { WeatherForecast } from "@/components/weather-forecast";
+import FavouriteCities from "@/components/favourite-cities";
 
 const WeatherDashboard = () => {
   const {
@@ -72,6 +73,7 @@ const WeatherDashboard = () => {
   }
 
   const locationName = locationQuery.data?.[0];
+
   if (weatherQuery.error || forecastQuery.error) {
     return (
       <Alert variant="destructive">
@@ -97,7 +99,7 @@ const WeatherDashboard = () => {
 
   return (
     <div className="p-4 space-y-4">
-      {/* Fav cities */}
+      <FavouriteCities />
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold tracking-tight">My Location</h1>
         <Button
