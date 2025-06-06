@@ -1,12 +1,6 @@
 import type { ForecastData } from "@/apis/types";
 import { format } from "date-fns";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardAction,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
 interface WeatherForecast5daysProps {
   data: ForecastData;

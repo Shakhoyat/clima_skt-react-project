@@ -1,8 +1,8 @@
 // src/components/weather/favorite-button.tsx
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { WeatherData } from "@/api/types";
-import { useFavorites } from "@/hooks/use-favorite";
+import type { WeatherData } from "@/apis/types";
+import { useFavorites } from "@/hooks/use-favourite";
 import { toast } from "sonner";
 
 interface FavoriteButtonProps {

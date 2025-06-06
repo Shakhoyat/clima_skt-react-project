@@ -1,32 +1,28 @@
-import type { WeatherData } from "@/apis/types";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Sunrise, Sunset, Compass, Gauge } from "lucide-react";
 import { format } from "date-fns";
-import { Compass, Gauge, Sunrise, Sunset } from "lucide-react";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import type { WeatherData } from "@/apis/types";
 
 interface WeatherDetailsProps {
   data: WeatherData;
 }
-const formatTime = (timestamp: number) => {
-  return format(new Date(timestamp * 1000), "hh:mm a");
-};
-const WeatherDetails = ({ data }: WeatherDetailsProps) => {
-  if (!data || !data.sys || !data.main || !data.wind) {
-    return null; // or a loading/error state
-  }
-  const { main, wind, sys, weather } = data;
 
-  const getWindDirection = (deg: number) => {
+export function WeatherDetails({ data }: WeatherDetailsProps) {
+  const { wind, main, sys } = data;
+
+  // Format time using date-fns
+  const formatTime = (timestamp: number) => {
+    return format(new Date(timestamp * 1000), "h:mm a");
+  };
+
+  // Convert wind degree to direction
+  const getWindDirection = (degree: number) => {
     const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-    const index = Math.round(((deg %= 360) < 0 ? deg + 360 : deg) / 45) % 8;
+    const index =
+      Math.round(((degree %= 360) < 0 ? degree + 360 : degree) / 45) % 8;
     return directions[index];
   };
+
   const details = [
     {
       title: "Sunrise",
@@ -38,7 +34,7 @@ const WeatherDetails = ({ data }: WeatherDetailsProps) => {
       title: "Sunset",
       value: formatTime(sys.sunset),
       icon: Sunset,
-      color: "text-orange-500",
+      color: "text-blue-500",
     },
     {
       title: "Wind Direction",
@@ -53,35 +49,30 @@ const WeatherDetails = ({ data }: WeatherDetailsProps) => {
       color: "text-purple-500",
     },
   ];
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Weather Description</CardTitle>
+        <CardTitle>Weather Details</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-6 sm:grid-cols-2">
-          {details.map((detail) => {
-            return (
-              <div
-                key={detail.title}
-                className="flex items-center gap-3 rounded-lg border p-4"
-              >
-                <detail.icon className={`h-5 w-5 ${detail.color}`} />
-                <div>
-                  <p className="text-sm font-medium leading-none">
-                    {detail.title}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {detail.value}
-                  </p>
-                </div>
+          {details.map((detail) => (
+            <div
+              key={detail.title}
+              className="flex items-center gap-3 rounded-lg border p-4"
+            >
+              <detail.icon className={`h-5 w-5 ${detail.color}`} />
+              <div>
+                <p className="text-sm font-medium leading-none">
+                  {detail.title}
+                </p>
+                <p className="text-sm text-muted-foreground">{detail.value}</p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </CardContent>
     </Card>
   );
-};
-
-export default WeatherDetails;
+}
